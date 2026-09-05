@@ -6,4 +6,4 @@ Simulating and visualizing a satellite in a Low Earth Orbit around Earth.
 
 ## Simulation
 
-![LEO Orbit Simulation](./leo-orbit-simulation.png)
+![LEO Orbit Simulation](./orbit-simulation.png)
