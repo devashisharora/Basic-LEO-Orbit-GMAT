@@ -1,0 +1,221 @@
+%General Mission Analysis Tool(GMAT) Script
+%Created: 2026-09-05 16:53:53
+
+
+%----------------------------------------
+%---------- Spacecraft
+%----------------------------------------
+
+Create Spacecraft DefaultSC;
+DefaultSC.DateFormat = TAIModJulian;
+DefaultSC.Epoch = '21545';
+DefaultSC.CoordinateSystem = EarthMJ2000Eq;
+DefaultSC.DisplayStateType = Cartesian;
+DefaultSC.X = 7100;
+DefaultSC.Y = 0;
+DefaultSC.Z = 1300;
+DefaultSC.VX = 0;
+DefaultSC.VY = 7.35;
+DefaultSC.VZ = 1;
+DefaultSC.DryMass = 850;
+DefaultSC.Cd = 2.2;
+DefaultSC.Cr = 1.8;
+DefaultSC.DragArea = 15;
+DefaultSC.SRPArea = 1;
+DefaultSC.SPADDragScaleFactor = 1;
+DefaultSC.SPADSRPScaleFactor = 1;
+DefaultSC.AtmosDensityScaleFactor = 1;
+DefaultSC.ExtendedMassPropertiesModel = 'None';
+DefaultSC.NAIFId = -10000001;
+DefaultSC.NAIFIdReferenceFrame = -9000001;
+DefaultSC.OrbitColor = Red;
+DefaultSC.TargetColor = Teal;
+DefaultSC.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+DefaultSC.CdSigma = 1e+70;
+DefaultSC.CrSigma = 1e+70;
+DefaultSC.Id = 'SatId';
+DefaultSC.Attitude = CoordinateSystemFixed;
+DefaultSC.SPADSRPInterpolationMethod = Bilinear;
+DefaultSC.SPADSRPScaleFactorSigma = 1e+70;
+DefaultSC.SPADDragInterpolationMethod = Bilinear;
+DefaultSC.SPADDragScaleFactorSigma = 1e+70;
+DefaultSC.AtmosDensityScaleFactorSigma = 1e+70;
+DefaultSC.ModelFile = 'aura.3ds';
+DefaultSC.ModelOffsetX = 0;
+DefaultSC.ModelOffsetY = 0;
+DefaultSC.ModelOffsetZ = 0;
+DefaultSC.ModelRotationX = 0;
+DefaultSC.ModelRotationY = 0;
+DefaultSC.ModelRotationZ = 0;
+DefaultSC.ModelScale = 1;
+DefaultSC.AttitudeDisplayStateType = 'Quaternion';
+DefaultSC.AttitudeRateDisplayStateType = 'AngularVelocity';
+DefaultSC.AttitudeCoordinateSystem = EarthMJ2000Eq;
+DefaultSC.EulerAngleSequence = '321';
+
+Create Spacecraft EO_satellite;
+EO_satellite.DateFormat = TAIModJulian;
+EO_satellite.Epoch = '21545';
+EO_satellite.CoordinateSystem = EarthMJ2000Eq;
+EO_satellite.DisplayStateType = Keplerian;
+EO_satellite.SMA = 6877.999999999997;
+EO_satellite.ECC = 0.0009999999999996171;
+EO_satellite.INC = 97.5;
+EO_satellite.RAAN = 0;
+EO_satellite.AOP = 0;
+EO_satellite.TA = 0;
+EO_satellite.DryMass = 850;
+EO_satellite.Cd = 2.2;
+EO_satellite.Cr = 1.8;
+EO_satellite.DragArea = 15;
+EO_satellite.SRPArea = 1;
+EO_satellite.SPADDragScaleFactor = 1;
+EO_satellite.SPADSRPScaleFactor = 1;
+EO_satellite.AtmosDensityScaleFactor = 1;
+EO_satellite.ExtendedMassPropertiesModel = 'None';
+EO_satellite.NAIFId = -10001001;
+EO_satellite.NAIFIdReferenceFrame = -9001001;
+EO_satellite.OrbitColor = Green;
+EO_satellite.TargetColor = LightGray;
+EO_satellite.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+EO_satellite.CdSigma = 1e+70;
+EO_satellite.CrSigma = 1e+70;
+EO_satellite.Id = 'SatId';
+EO_satellite.Attitude = CoordinateSystemFixed;
+EO_satellite.SPADSRPInterpolationMethod = Bilinear;
+EO_satellite.SPADSRPScaleFactorSigma = 1e+70;
+EO_satellite.SPADDragInterpolationMethod = Bilinear;
+EO_satellite.SPADDragScaleFactorSigma = 1e+70;
+EO_satellite.AtmosDensityScaleFactorSigma = 1e+70;
+EO_satellite.ModelFile = 'aura.3ds';
+EO_satellite.ModelOffsetX = 0;
+EO_satellite.ModelOffsetY = 0;
+EO_satellite.ModelOffsetZ = 0;
+EO_satellite.ModelRotationX = 0;
+EO_satellite.ModelRotationY = 0;
+EO_satellite.ModelRotationZ = 0;
+EO_satellite.ModelScale = 1;
+EO_satellite.AttitudeDisplayStateType = 'Quaternion';
+EO_satellite.AttitudeRateDisplayStateType = 'AngularVelocity';
+EO_satellite.AttitudeCoordinateSystem = EarthMJ2000Eq;
+EO_satellite.EulerAngleSequence = '321';
+
+%----------------------------------------
+%---------- ForceModels
+%----------------------------------------
+
+Create ForceModel DefaultProp_ForceModel;
+DefaultProp_ForceModel.CentralBody = Earth;
+DefaultProp_ForceModel.PrimaryBodies = {Earth};
+DefaultProp_ForceModel.Drag = None;
+DefaultProp_ForceModel.SRP = Off;
+DefaultProp_ForceModel.RelativisticCorrection = Off;
+DefaultProp_ForceModel.ErrorControl = RSSStep;
+DefaultProp_ForceModel.GravityField.Earth.Degree = 4;
+DefaultProp_ForceModel.GravityField.Earth.Order = 4;
+DefaultProp_ForceModel.GravityField.Earth.StmLimit = 100;
+DefaultProp_ForceModel.GravityField.Earth.PotentialFile = 'JGM2.cof';
+DefaultProp_ForceModel.GravityField.Earth.TideModel = 'None';
+
+%----------------------------------------
+%---------- Propagators
+%----------------------------------------
+
+Create Propagator DefaultProp;
+DefaultProp.FM = DefaultProp_ForceModel;
+DefaultProp.Type = RungeKutta89;
+DefaultProp.InitialStepSize = 60;
+DefaultProp.Accuracy = 9.999999999999999e-12;
+DefaultProp.MinStep = 0.001;
+DefaultProp.MaxStep = 2700;
+DefaultProp.MaxStepAttempts = 50;
+DefaultProp.StopIfAccuracyIsViolated = true;
+
+%----------------------------------------
+%---------- Subscribers
+%----------------------------------------
+
+Create OpenFramesInterface DefaultOrbitView;
+DefaultOrbitView.SolverIterations = Current;
+DefaultOrbitView.UpperLeft = [ 0 0 ];
+DefaultOrbitView.Size = [ 0.8376470588235294 0.9306930693069307 ];
+DefaultOrbitView.RelativeZOrder = 70;
+DefaultOrbitView.Maximized = true;
+DefaultOrbitView.Add = {EO_satellite, Earth};
+DefaultOrbitView.View = {DefaultOrbitView_View};
+DefaultOrbitView.CoordinateSystem = EarthMJ2000Eq;
+DefaultOrbitView.DrawObject = [ true true ];
+DefaultOrbitView.DrawTrajectory = [ true true ];
+DefaultOrbitView.DrawAxes = [ false false ];
+DefaultOrbitView.DrawXYPlane = [ false false ];
+DefaultOrbitView.DrawLabel = [ true true ];
+DefaultOrbitView.DrawUsePropLabel = [ false false ];
+DefaultOrbitView.DrawCenterPoint = [ true true ];
+DefaultOrbitView.DrawEndPoints = [ true true ];
+DefaultOrbitView.DrawVelocity = [ false false ];
+DefaultOrbitView.DrawGrid = [ false false ];
+DefaultOrbitView.DrawLineWidth = [ 2 2 ];
+DefaultOrbitView.DrawMarkerSize = [ 10 10 ];
+DefaultOrbitView.DrawFontSize = [ 20 20 ];
+DefaultOrbitView.Axes = On;
+DefaultOrbitView.AxesLength = 12756.2726;
+DefaultOrbitView.AxesLabels = On;
+DefaultOrbitView.FrameLabel = Off;
+DefaultOrbitView.XYPlane = On;
+DefaultOrbitView.EclipticPlane = Off;
+DefaultOrbitView.EnableStars = On;
+DefaultOrbitView.StarCatalog = 'inp_StarsHYGv3.txt';
+DefaultOrbitView.StarCount = 40000;
+DefaultOrbitView.MinStarMag = -2;
+DefaultOrbitView.MaxStarMag = 6;
+DefaultOrbitView.MinStarPixels = 1;
+DefaultOrbitView.MaxStarPixels = 10;
+DefaultOrbitView.MinStarDimRatio = 0.5;
+DefaultOrbitView.ShowPlot = true;
+DefaultOrbitView.ShowToolbar = true;
+DefaultOrbitView.SolverIterLastN = 0;
+DefaultOrbitView.ShowVR = false;
+DefaultOrbitView.PlaybackTimeScale = 3600;
+DefaultOrbitView.MultisampleAntiAliasing = On;
+DefaultOrbitView.MSAASamples = 2;
+DefaultOrbitView.DrawFontPosition = {'Top-Right', 'Top-Right'};
+
+Create GroundTrack DefaultGroundTrackPlot;
+DefaultGroundTrackPlot.SolverIterations = Current;
+DefaultGroundTrackPlot.UpperLeft = [ 0.002941176470588235 0 ];
+DefaultGroundTrackPlot.Size = [ 0.5 0.4504950495049505 ];
+DefaultGroundTrackPlot.RelativeZOrder = 59;
+DefaultGroundTrackPlot.Maximized = false;
+DefaultGroundTrackPlot.CentralBody = Earth;
+DefaultGroundTrackPlot.Add = {DefaultSC};
+DefaultGroundTrackPlot.DataCollectFrequency = 1;
+DefaultGroundTrackPlot.UpdatePlotFrequency = 50;
+DefaultGroundTrackPlot.NumPointsToRedraw = 0;
+DefaultGroundTrackPlot.MaxPlotPoints = 20000;
+DefaultGroundTrackPlot.ShowPlot = true;
+
+%----------------------------------------
+%---------- User Objects
+%----------------------------------------
+
+Create OpenFramesView DefaultOrbitView_View;
+DefaultOrbitView_View.ViewFrame = CoordinateSystem;
+DefaultOrbitView_View.ViewTrajectory = Off;
+DefaultOrbitView_View.InertialFrame = Off;
+DefaultOrbitView_View.SetDefaultLocation = On;
+DefaultOrbitView_View.DefaultEye = [ 30000 0 0 ];
+DefaultOrbitView_View.DefaultCenter = [ 0 0 0 ];
+DefaultOrbitView_View.DefaultUp = [ 0 0 1 ];
+DefaultOrbitView_View.SetCurrentLocation = On;
+DefaultOrbitView_View.CurrentEye = [ 29355.66765051909 -2318.690730237873 5733.101262822413 ];
+DefaultOrbitView_View.CurrentCenter = [ -3.637978807091713e-12 -4.547473508864641e-12 -3.637978807091713e-12 ];
+DefaultOrbitView_View.CurrentUp = [ -0.197374169465618 -0.08379726307706115 0.9767402192643401 ];
+DefaultOrbitView_View.FOVy = 45;
+
+
+%----------------------------------------
+%---------- Mission Sequence
+%----------------------------------------
+
+BeginMissionSequence;
+Propagate DefaultProp(EO_satellite) {EO_satellite.ElapsedSecs = 86400};
