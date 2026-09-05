@@ -1,4 +1,4 @@
-# Basic LEO Orbit using GMAT 🛰️
+# Basic LEO Orbit using GMAT 
 
 My first project using NASA's General Mission Analysis Tool (GMAT).
 
